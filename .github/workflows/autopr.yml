@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   npm-install:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
