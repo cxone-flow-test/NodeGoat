@@ -27,6 +27,15 @@ jobs:
         run: |
           : Update after npm install
           npm install
-          git commit -m "executed npm install"
-          git push
+      
+      - shell: bash
+        run: |
+          : Commit the update
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add --all
+          git commit -m "update after npm install"
+          git push -u origin HEAD:"${{ github.head_ref }}"
+          
         
