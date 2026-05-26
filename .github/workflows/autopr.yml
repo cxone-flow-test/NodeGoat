@@ -1,0 +1,32 @@
+name: Checkmarx NPM install for Auto PR
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+
+permissions:
+  contents: read
+
+jobs:
+  npm-install:
+    runs-on: ubuntu
+    permissions:
+      contents: write
+
+    steps:
+      - name: Fetch Code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+
+      - shell: bash
+        run: |
+          : Update after npm install
+          npm install
+          git commit -m "executed npm install"
+          git push
+        
